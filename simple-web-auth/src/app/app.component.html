@@ -1,0 +1,53 @@
+<h1>Auth Sample</h1>
+
+<button (click)="login()" [hidden]="loggedIn" >Login</button>
+<button (click)="logout()" [hidden]="!loggedIn">Logout</button>
+
+
+<div *ngIf="loggedIn">
+    <h2>We are logged in (╯°□°）╯︵ ┻━┻</h2>
+
+
+    <h2>Profile</h2>
+    <button (click)="getProfile()">Get Profile Information</button>
+    <div>
+        <p>Display Name: {{profile?.displayName}}</p>
+    </div>
+
+
+    <h2>Get Users (MS Graph)</h2>
+    <input type="text" [(ngModel)]="userNameFilter">
+    <button (click)="getUsers()" >Search</button>
+    <div *ngIf="users">
+        <ul>
+            <li *ngFor="let u of users">
+                {{u.displayName}} 
+                <button (click)="addToFriends(u)" [hidden]="!isFriend(u)">Add to Friends</button>
+                <button (click)="removeFromFriends(u)" [hidden]="isFriend(u)">Remove from Friends</button>
+            </li>
+        </ul>
+    </div>
+    <br>
+
+
+    <h2>Friends</h2>
+    <div *ngIf="friends">
+        <ul>
+            <li *ngFor="let f of friends">
+                {{f.displayName}} 
+                
+            </li>
+        </ul>
+    </div>
+
+
+    <h2>Get Pokemons (Custom API)</h2>
+    <button (click)="getPokemons()" >Get Pokemons</button>
+    <div *ngIf="pokemons">
+        <ul>
+            <li *ngFor="let p of pokemons">
+                {{p}}
+            </li>
+        </ul>
+    </div>
+</div>
